@@ -25,7 +25,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "pe.recommendationsApp.recommendationsapp"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33 //flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     compileOptions {
