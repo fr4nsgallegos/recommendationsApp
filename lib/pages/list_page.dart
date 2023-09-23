@@ -3,11 +3,55 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:recommendationsapp/constants/constants.dart';
 
-class ListPage extends StatelessWidget {
+class ListPage extends StatefulWidget {
   ListPage({super.key});
 
+  @override
+  State<ListPage> createState() => _ListPageState();
+}
+
+class _ListPageState extends State<ListPage> {
   CollectionReference recommendationsReference =
       FirebaseFirestore.instance.collection('recommendations');
+
+  Widget stream() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
+      child: StreamBuilder(
+        stream: recommendationsReference.snapshots(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            QuerySnapshot recommendationsCollection = snapshot.data;
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: recommendationsCollection.size,
+              itemBuilder: (BuildContext context, int index) {
+                Map<String, dynamic> myDoc =
+                    recommendationsCollection.docs[index].data()
+                        as Map<String, dynamic>;
+                myDoc['id'] = recommendationsCollection.docs[index].id;
+                print(myDoc);
+                return ListTile(
+                  title: Text(
+                    myDoc["description"],
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  trailing: Text(
+                    myDoc["score"].toString(),
+                  ),
+                  subtitle:
+                      Text("Lat: ${myDoc['lat']} , Lon: ${myDoc['lang']}"),
+                );
+              },
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,30 +65,7 @@ class ListPage extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                fondoBlanco(context),
-                StreamBuilder(
-                  stream: recommendationsReference.snapshots(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      QuerySnapshot recommendationsCollection = snapshot.data;
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: recommendationsCollection.size,
-                        itemBuilder: (BuildContext context, int index) {
-                          Map<String, dynamic> myDoc =
-                              recommendationsCollection.docs[index].data()
-                                  as Map<String, dynamic>;
-                          myDoc['id'] =
-                              recommendationsCollection.docs[index].id;
-                          print(myDoc);
-                        },
-                      );
-                    }
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                )
+                fondoBlanco(context, stream()),
               ],
             ),
           )

@@ -16,7 +16,7 @@ class AddPage extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                fondoBlanco(context),
+                fondoBlanco(context, Container()),
               ],
             ),
           )
