@@ -154,7 +154,60 @@ class LoginPage extends StatelessWidget {
                           child: Text("Iniciar sesión"),
                         )
                       ],
-                    )
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "o inicia con",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        ElevatedButton(
+                          style:
+                              ElevatedButton.styleFrom(shape: CircleBorder()),
+                          onPressed: () async {
+                            try {
+                              final GoogleSignInAccount? googleUser =
+                                  await _googleSignIn.signIn();
+                              final GoogleSignInAuthentication? googleAuth =
+                                  await googleUser?.authentication;
+                              final AuthCredential credential =
+                                  GoogleAuthProvider.credential(
+                                accessToken: googleAuth?.accessToken,
+                                idToken: googleAuth?.idToken,
+                              );
+                              final User? user = (await FirebaseAuth.instance
+                                      .signInWithCredential(credential))
+                                  .user;
+                              print(user);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomePage(),
+                                ),
+                              );
+                            } catch (e) {
+                              print(e);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    e.toString(),
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                          child: Text(
+                            "G",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ],
