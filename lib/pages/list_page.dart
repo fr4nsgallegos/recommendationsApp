@@ -31,16 +31,25 @@ class _ListPageState extends State<ListPage> {
                         as Map<String, dynamic>;
                 myDoc['id'] = recommendationsCollection.docs[index].id;
                 print(myDoc);
-                return ListTile(
-                  title: Text(
-                    myDoc["description"],
-                    style: TextStyle(color: Colors.black),
+                return Container(
+                  padding: EdgeInsets.all(5),
+                  color: Colors.cyan.shade800,
+                  child: ListTile(
+                    // hoverColor: Colors.red,
+                    // color
+                    title: Text(
+                      myDoc["description"],
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    trailing: Text(
+                      myDoc["score"].toString(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    subtitle: Text(
+                      "Lat: ${myDoc['lat']} , Lon: ${myDoc['lang']}",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                  trailing: Text(
-                    myDoc["score"].toString(),
-                  ),
-                  subtitle:
-                      Text("Lat: ${myDoc['lat']} , Lon: ${myDoc['lang']}"),
                 );
               },
             );
