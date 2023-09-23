@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:recommendationsapp/constants/constants.dart';
 
@@ -14,6 +15,18 @@ class _AddPageState extends State<AddPage> {
 
   TextEditingController _scoreController = TextEditingController();
   String dropDownValue = '1';
+  double lat = 0;
+  double lang = 0;
+
+  Future<void> getDataLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+    setState(() {
+      lat = position.latitude;
+      lang = position.longitude;
+    });
+  }
 
   Widget forms(BuildContext context) {
     return Padding(
@@ -75,6 +88,17 @@ class _AddPageState extends State<AddPage> {
                 ),
               ),
             ],
+          ),
+          ElevatedButton(
+            onPressed: () {
+              getDataLocation().then((value) {
+                print(lang);
+                print(lat);
+              });
+            },
+            child: Icon(
+              Icons.place,
+            ),
           )
         ],
       ),
