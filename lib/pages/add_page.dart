@@ -155,18 +155,74 @@ class _AddPageState extends State<AddPage> {
               onPressed: () {
                 _createExcel();
               },
-              child: Text("Generar Excel"))
+              child: Text("Generar Excel")),
+          ElevatedButton(
+              onPressed: () {
+                getRecommendations();
+              },
+              child: Text("debugeando"))
         ],
       ),
     );
+  }
+
+  Future<void> getRecommendations() async {
+    await recommendationsReference.get().then((value) {
+      QuerySnapshot recommendationsCollection = value;
+      List<QueryDocumentSnapshot> docs = recommendationsCollection.docs;
+
+      docs.forEach(
+        (element) {
+          Map<String, dynamic> myDoc = element.data() as Map<String, dynamic>;
+          myDoc['id'] = element.id;
+          print(myDoc['id']);
+          print(myDoc.length);
+        },
+      );
+    });
   }
 
   Future<void> _createExcel() async {
     final workbook = excel.Workbook();
     final excel.Worksheet sheet = workbook.worksheets[0];
 
-    sheet.getRangeByName('B2').setText('Hola ya estoy escribiendo');
+    sheet.getRangeByName('A1').setText('ID');
+    sheet.getRangeByName('B1').setText('DESCRIPCIÓN');
+    sheet.getRangeByName('C1').setText('LAT');
+    sheet.getRangeByName('D1').setText('LONG');
+    sheet.getRangeByName('E1').setText('SCORE');
+    int rowActual = 2;
+    int columnActual = 1;
+    await recommendationsReference.get().then((value) {
+      QuerySnapshot recommendationsCollection = value;
+      List<QueryDocumentSnapshot> docs = recommendationsCollection.docs;
 
+      docs.forEach(
+        (element) {
+          Map<String, dynamic> myDoc = element.data() as Map<String, dynamic>;
+          myDoc['id'] = element.id;
+          print(myDoc);
+          sheet.getRangeByIndex(rowActual, columnActual).setText(myDoc['id']);
+          sheet
+              .getRangeByIndex(rowActual, columnActual + 1)
+              .setText(myDoc['description']);
+          sheet
+              .getRangeByIndex(rowActual, columnActual + 2)
+              .setText(myDoc['lat'].toString());
+          sheet
+              .getRangeByIndex(rowActual, columnActual + 3)
+              .setText(myDoc['lang'].toString());
+          sheet
+              .getRangeByIndex(rowActual, columnActual + 4)
+              .setText(myDoc['score'].toString());
+          setState(() {
+            rowActual += 1;
+          });
+        },
+      );
+    });
+
+    //GUARDAR Y ABRIR EL DOCUMENTO EN EL CELULAR
     final List<int> bytes = workbook.saveAsStream();
     workbook.dispose();
 
