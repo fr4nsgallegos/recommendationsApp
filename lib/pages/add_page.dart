@@ -1,9 +1,15 @@
+import 'dart:ffi';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:recommendationsapp/constants/constants.dart';
 import 'package:recommendationsapp/pages/map_page.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' as excel;
+import 'package:open_file/open_file.dart';
 
 class AddPage extends StatefulWidget {
   AddPage({super.key});
@@ -15,7 +21,6 @@ class AddPage extends StatefulWidget {
 class _AddPageState extends State<AddPage> {
   TextEditingController _descriptionController = TextEditingController();
 
-  TextEditingController _scoreController = TextEditingController();
   String dropDownValue = '1';
   double lat = 0;
   double lang = 0;
@@ -111,10 +116,7 @@ class _AddPageState extends State<AddPage> {
             child: ElevatedButton(
               style: ButtonStyle(),
               onPressed: () {
-                getDataLocation().then((value) {
-                  print(lang);
-                  print(lat);
-                });
+                getDataLocation().then((value) {});
               },
               child: Icon(
                 Icons.place,
@@ -148,10 +150,35 @@ class _AddPageState extends State<AddPage> {
                   ),
                 );
               },
-              child: Text("Ver mapa"))
+              child: Text("Ver mapa")),
+          ElevatedButton(
+              onPressed: () {
+                _createExcel();
+              },
+              child: Text("Generar Excel"))
         ],
       ),
     );
+  }
+
+  Future<void> _createExcel() async {
+    final workbook = excel.Workbook();
+    final excel.Worksheet sheet = workbook.worksheets[0];
+
+    sheet.getRangeByName('B2').setText('Hola ya estoy escribiendo');
+
+    final List<int> bytes = workbook.saveAsStream();
+    workbook.dispose();
+
+    final String path = (await getApplicationSupportDirectory()).path;
+
+    final String fileName = '$path/MyFirstExcel.xlsx';
+
+    final File file = File(fileName);
+
+    await file.writeAsBytes(bytes, flush: true);
+
+    OpenFile.open(fileName);
   }
 
   @override

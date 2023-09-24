@@ -30,7 +30,6 @@ class _ListPageState extends State<ListPage> {
                     recommendationsCollection.docs[index].data()
                         as Map<String, dynamic>;
                 myDoc['id'] = recommendationsCollection.docs[index].id;
-                print(myDoc);
                 return Container(
                   padding: EdgeInsets.all(5),
                   margin: EdgeInsets.all(5),
