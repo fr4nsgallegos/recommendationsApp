@@ -10,7 +10,7 @@ void main() async {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Recommendations App",
-      home: HomePage(),
+      home: LoginPage(),
     ),
   );
 }
