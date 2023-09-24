@@ -7,6 +7,8 @@
         android:label="recommendationsapp"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+         <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyCwZ7XMWl_EKHUTEsdrWqUQUPZvb5gnlSo"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
