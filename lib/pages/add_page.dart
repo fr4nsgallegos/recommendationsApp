@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:recommendationsapp/constants/constants.dart';
+import 'package:recommendationsapp/pages/map_page.dart';
 
 class AddPage extends StatefulWidget {
   AddPage({super.key});
@@ -17,6 +19,9 @@ class _AddPageState extends State<AddPage> {
   String dropDownValue = '1';
   double lat = 0;
   double lang = 0;
+
+  CollectionReference recommendationsReference =
+      FirebaseFirestore.instance.collection('recommendations');
 
   Future<void> getDataLocation() async {
     Position position = await Geolocator.getCurrentPosition(
@@ -89,17 +94,61 @@ class _AddPageState extends State<AddPage> {
               ),
             ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              getDataLocation().then((value) {
-                print(lang);
-                print(lat);
-              });
-            },
-            child: Icon(
-              Icons.place,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text("Lat: ${lat}"),
+              // SizedBox(width: m,)
+              Text("Lat: ${lang}"),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            width: 50,
+            height: 50,
+            child: ElevatedButton(
+              style: ButtonStyle(),
+              onPressed: () {
+                getDataLocation().then((value) {
+                  print(lang);
+                  print(lat);
+                });
+              },
+              child: Icon(
+                Icons.place,
+              ),
             ),
-          )
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                // recommendationsReference.get().then((value) {
+                //   QuerySnapshot recommendationCollection = value;
+                //   List<QueryDocumentSnapshot> docs =
+                //       recommendationCollection.docs;
+                // });
+                recommendationsReference.add({
+                  'description': _descriptionController.text,
+                  'score': dropDownValue,
+                  'lat': lat,
+                  'lang': lang,
+                });
+              },
+              child: Text("Agregar recomendación")),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MapPage(),
+                  ),
+                );
+              },
+              child: Text("Ver mapa"))
         ],
       ),
     );

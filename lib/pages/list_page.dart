@@ -33,6 +33,7 @@ class _ListPageState extends State<ListPage> {
                 print(myDoc);
                 return Container(
                   padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.all(5),
                   color: Colors.cyan.shade800,
                   child: ListTile(
                     // hoverColor: Colors.red,
