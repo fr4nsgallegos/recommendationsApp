@@ -419,10 +419,17 @@ class _AddPageState extends State<AddPage> {
   Future<void> _exportPdf() async {
     final pdf = pw.Document();
     pdf.addPage(
-      pw.Page(
+      pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
-          return pw.Text("HOLA MUNDO");
+          return [
+            pw.ListView.builder(
+              itemCount: 300,
+              itemBuilder: (pw.Context context, int index) {
+                return pw.Text("hola $index");
+              },
+            ),
+          ];
         },
       ),
     );
