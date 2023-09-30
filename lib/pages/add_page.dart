@@ -321,7 +321,25 @@ class _AddPageState extends State<AddPage> {
     sheet1.getRangeByName('C15').setNumber(2600);
     sheet1.getRangeByName('C16').setNumber(4464);
     sheet1.getRangeByName('C17').setNumber(2700);
-    sheet1.getRangeByName('C18').setFormula('=SUM(C11:C17)');
+    sheet1.getRangeByName('B18').setFormula('=SUM(C11:C17)');
+
+    sheet1.getRangeByName('D11').setFormula('=IF(C11>B11, C11-B11, B11-C11)');
+    sheet1.getRangeByName('D12').setFormula('=IF(C12>B12, C11-B12, B12-C12)');
+    sheet1.getRangeByName('D13').setFormula('=IF(C13>B13, C11-B13, B13-C13)');
+    sheet1.getRangeByName('D14').setFormula('=IF(C14>B14, C11-B14, B14-C14)');
+    sheet1.getRangeByName('D15').setFormula('=IF(C15>B15, C11-B15, B15-C15)');
+    sheet1.getRangeByName('D16').setFormula('=IF(C16>B16, C11-B16, B16-C16)');
+    sheet1.getRangeByName('D17').setFormula('=IF(C17>B17, C11-B17, B17-C17)');
+    sheet1.getRangeByName('D18').setFormula('=IF(C18>B18, C11-B18, B18-C18)');
+
+    final ChartCollection charts = ChartCollection(sheet1);
+
+    final Chart chart = charts.add();
+    chart.chartType = ExcelChartType.pie;
+    chart.dataRange = sheet1.getRangeByName('A11:B17');
+    chart.isSeriesInRows = false;
+    chart.chartTitle = "Gastos en eventos";
+    sheet1.charts = charts;
 
     //crear  y abrir file
     List<int> bytes = workbook.saveSync();
