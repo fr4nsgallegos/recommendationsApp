@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ import 'package:recommendationsapp/pages/map_page.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' as excel;
 import 'package:open_file/open_file.dart';
 import 'package:syncfusion_officechart/officechart.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 class AddPage extends StatefulWidget {
   AddPage({super.key});
@@ -172,7 +175,13 @@ class _AddPageState extends State<AddPage> {
             onPressed: () {
               _createExcelChart2();
             },
-            child: Text("CHART 1"),
+            child: Text("CHART 2"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _exportPdf();
+            },
+            child: Text("TOPDF"),
           ),
         ],
       ),
@@ -403,6 +412,28 @@ class _AddPageState extends State<AddPage> {
     final File file = File(fileName);
 
     await file.writeAsBytes(bytes, flush: true);
+
+    OpenFile.open(fileName);
+  }
+
+  Future<void> _exportPdf() async {
+    final pdf = pw.Document();
+    pdf.addPage(
+      pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return pw.Text("HOLA MUNDO");
+        },
+      ),
+    );
+    Uint8List bytes = await pdf.save();
+    print(bytes);
+
+    Directory directory = await getApplicationSupportDirectory();
+    String fileName = "${directory.path}/reportPdf.pdf";
+
+    File pdfFile = File(fileName);
+    await pdfFile.writeAsBytes(bytes, flush: true);
 
     OpenFile.open(fileName);
   }

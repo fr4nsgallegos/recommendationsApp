@@ -48,6 +48,7 @@ dependencies:
   path: ^1.8.3
   open_file: ^3.3.2
   syncfusion_officechart: ^23.1.38
+  pdf: ^3.10.4
 
 
 
