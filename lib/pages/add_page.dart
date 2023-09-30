@@ -424,9 +424,25 @@ class _AddPageState extends State<AddPage> {
         build: (pw.Context context) {
           return [
             pw.ListView.builder(
-              itemCount: 300,
+              itemCount: 150,
               itemBuilder: (pw.Context context, int index) {
-                return pw.Text("hola $index");
+                return pw.Container(
+                  margin: pw.EdgeInsets.all(8),
+                  padding:
+                      pw.EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  decoration: pw.BoxDecoration(
+                    borderRadius: pw.BorderRadius.circular(15),
+                    color: PdfColors.red300,
+                    border: pw.Border.all(
+                      width: 1.8,
+                      color: PdfColors.red,
+                    ),
+                  ),
+                  child: pw.Padding(
+                    padding: pw.EdgeInsets.all(5.0),
+                    child: pw.Text("Hola $index"),
+                  ),
+                );
               },
             ),
           ];
