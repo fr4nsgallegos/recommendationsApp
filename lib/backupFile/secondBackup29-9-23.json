@@ -1,0 +1,249 @@
+{
+  "__collections__": {
+    "candidate": {
+      "1fttARtJ55vwUTWZ6oON": {
+        "name": "Castillo",
+        "votes": 37,
+        "__collections__": {}
+      },
+      "3bVRPzJNYRp0QefXVYna": {
+        "name": "Castillo",
+        "votes": 16,
+        "__collections__": {}
+      },
+      "8kvuS5rxN2N1gqoIbCHa": {
+        "name": "Castillo",
+        "votes": 16,
+        "__collections__": {}
+      },
+      "FgO1BmcAqk6oKpOn4tSg": {
+        "name": "Castillo",
+        "votes": 16,
+        "__collections__": {}
+      },
+      "OpBaNgxD6sF1900JtfxE": {
+        "name": "Castillo",
+        "votes": 16,
+        "__collections__": {}
+      },
+      "SK0LjbT0FBHZ7qHJKuwV": {
+        "name": "Castillo",
+        "votes": 23,
+        "__collections__": {}
+      },
+      "XP24yIDhAXqKazEAxso0": {
+        "name": "Castillo",
+        "votes": 32,
+        "__collections__": {}
+      },
+      "atEADGmQ4JJa2sSfFpXj": {
+        "name": "LUANA",
+        "votes": 258,
+        "__collections__": {}
+      },
+      "bh72yzsSAwPtq1Izbdqd": {
+        "name": "Castillo",
+        "votes": 16,
+        "__collections__": {}
+      },
+      "candite123": {
+        "name": "candidato 123456",
+        "votes": 13,
+        "__collections__": {}
+      },
+      "frgxd8rH3kmSMnun37xz": {
+        "name": "Castillo",
+        "votes": 16,
+        "__collections__": {}
+      },
+      "gHjQoY4f906lOoAmMSsj": {
+        "name": "Castillo",
+        "votes": 16,
+        "__collections__": {}
+      },
+      "h46JZtMDcapy8UkyBiWK": {
+        "name": "CastilloXXXX",
+        "votes": 19,
+        "__collections__": {}
+      },
+      "idCandidateX": {
+        "name": "Tomyssss",
+        "direccion": "lima",
+        "votes": 50,
+        "__collections__": {}
+      },
+      "idCandidateY": {
+        "name": "ppk",
+        "direccion": "arequipa, peru",
+        "votes": 20,
+        "__collections__": {}
+      },
+      "njyHoxeZQ2GWzQlCjMbg": {
+        "name": "Alan Garcia",
+        "votes": 10,
+        "__collections__": {}
+      },
+      "otCXLYXvC7mj9LTHsrv4": {
+        "name": "Castillo",
+        "votes": 16,
+        "__collections__": {}
+      },
+      "sd7xE9eWY5JAEgNUletR": {
+        "name": "Castillo",
+        "votes": 16,
+        "__collections__": {}
+      },
+      "xiIhWHslGZE5pXfniJYL": {
+        "name": "Keiko",
+        "votes": "8",
+        "__collections__": {}
+      }
+    },
+    "posts": {
+      "vexqpwDgduC4HpKruGHF": {
+        "date": {
+          "__datatype__": "timestamp",
+          "value": {
+            "_seconds": 1694880302,
+            "_nanoseconds": 356000000
+          }
+        },
+        "tittle": "mi experiencia",
+        "content": "Lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id neque libero. Donec finibus sem viverra.",
+        "__collections__": {}
+      }
+    },
+    "recommendations": {
+      "7zjGj51rMzpzszHkv3x8": {
+        "score": "2",
+        "description": "esta es otra descripción, huele feo",
+        "lang": -122.084,
+        "lat": 37.4219983,
+        "__collections__": {}
+      },
+      "Cwlfha6CEt63e0VvlFkn": {
+        "score": "5",
+        "description": "estamos en tacna ",
+        "lang": -70.5401883,
+        "lat": -18.213375,
+        "__collections__": {}
+      },
+      "bj4mtQu2A9Ry1nGzg3r5": {
+        "score": "4",
+        "description": "este lugar es muy limpio y huiele bien ",
+        "lang": -122.084,
+        "lat": 37.4219983,
+        "__collections__": {}
+      },
+      "cmdhX8KJQ81GSgkSW5kJ": {
+        "score": "2",
+        "description": "estamos en huaral, o cerca",
+        "lang": -77.2117433,
+        "lat": -11.5643667,
+        "__collections__": {}
+      },
+      "kqD22mLBR22iW9HlHMJu": {
+        "score": "5",
+        "description": "hay muchos turistas, las calles limpias",
+        "lang": -77.004375,
+        "lat": -12.0594833,
+        "__collections__": {}
+      },
+      "zsdLsXQW8A2riyE1jBbR": {
+        "score": 10,
+        "description": "essta e sla descripción",
+        "lang": 0,
+        "lat": 0,
+        "__collections__": {}
+      }
+    },
+    "users": {
+      "12345679": {
+        "uid": "1326546984",
+        "peso": 123,
+        "name": "JUAN",
+        "edad": 16,
+        "lastname": "BERROA",
+        "__collections__": {}
+      },
+      "70552516": {
+        "uid": "551681684651",
+        "peso": 50,
+        "name": "daniel",
+        "edad": 16,
+        "lastname": "mengoa",
+        "__collections__": {}
+      },
+      "65A4SD65AS4D": {
+        "uid": "54ASDAS6A5S4D",
+        "peso": 65,
+        "name": "JUAN",
+        "edad": 16,
+        "lastname": "PERIN",
+        "__collections__": {
+          "hermanos": {
+            "hermano1": {
+              "name": "pedro",
+              "edad": 15,
+              "lastname": "ibañez",
+              "__collections__": {
+                "sobrinos": {
+                  "sorbino1": {
+                    "name": "sobrino1",
+                    "__collections__": {}
+                  }
+                }
+              }
+            },
+            "hermano2": {
+              "name": "juan",
+              "edad": 45,
+              "lastname": "oriarte",
+              "__collections__": {}
+            },
+            "hermano3": {
+              "name": "maria",
+              "edad": 18,
+              "lastname": "benitez",
+              "__collections__": {}
+            }
+          },
+          "hijos": {
+            "hijo1": {
+              "name": "hijo1",
+              "__collections__": {}
+            },
+            "hijo2": {
+              "name": "hijo2",
+              "__collections__": {}
+            }
+          }
+        }
+      },
+      "984AS9D84A": {
+        "uid": "54ASD54A6AD",
+        "peso": 50,
+        "name": "MARIA",
+        "edad": 12,
+        "lastname": "MARTINEZ",
+        "__collections__": {}
+      },
+      "npgGSLruFlSwACES2x96": {
+        "uid": "5498465498asdasda",
+        "peso": 70,
+        "name": "frans",
+        "edad": 30,
+        "lastname": "gallegos",
+        "__collections__": {
+          "hermanos": {
+            "oBNt0YZsP9oTFogrz3DN": {
+              "nBro": "1",
+              "name": "juan",
+              "__collections__": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
