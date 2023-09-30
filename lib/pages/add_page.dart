@@ -168,6 +168,12 @@ class _AddPageState extends State<AddPage> {
             },
             child: Text("CHART 1"),
           ),
+          ElevatedButton(
+            onPressed: () {
+              _createExcelChart2();
+            },
+            child: Text("CHART 1"),
+          ),
         ],
       ),
     );
@@ -236,7 +242,86 @@ class _AddPageState extends State<AddPage> {
 
     chart.legend!.position = ExcelLegendPosition.bottom;
 
+    //position chart
+    chart.topRow = 0;
+    chart.bottomRow = 20;
+    chart.leftColumn = 1;
+    chart.rightColumn = 8;
+
     sheet.charts = charts;
+
+    //crear  y abrir file
+    List<int> bytes = workbook.saveSync();
+    workbook.dispose();
+    final String path = (await getApplicationSupportDirectory()).path;
+    final String fileName = '$path/REPORTE.xlsx';
+
+    final File file = File(fileName);
+    await file.writeAsBytes(bytes, flush: true);
+    OpenFile.open(fileName);
+  }
+
+  Future<void> _createExcelChart2() async {
+    final excel.Workbook workbook = excel.Workbook();
+    final excel.Worksheet sheet1 = workbook.worksheets.addWithName('PAGINA1');
+
+    sheet1.enableSheetCalculations();
+    sheet1.getRangeByIndex(1, 1).columnWidth = 20;
+    sheet1.getRangeByIndex(1, 2).columnWidth = 14;
+    sheet1.getRangeByIndex(1, 3).columnWidth = 13;
+    sheet1.getRangeByIndex(1, 4).columnWidth = 13;
+    sheet1.getRangeByIndex(1, 5).columnWidth = 9;
+    sheet1.getRangeByName('A1:A18').rowHeight = 21;
+
+    final excel.Style style1 = workbook.styles.add('Style1');
+    style1.backColor = '#D9E1F2';
+    style1.vAlign = excel.VAlignType.center;
+    style1.hAlign = excel.HAlignType.left;
+    style1.bold = true;
+
+    final excel.Style style2 = workbook.styles.add('Style2');
+    style2.backColor = '#8EA9DB';
+    style2.vAlign = excel.VAlignType.center;
+    style2.bold = true;
+
+    sheet1.getRangeByName('A10').cellStyle = style1;
+    sheet1.getRangeByName('B10:D10').cellStyle.backColor = '#D9E1F2';
+    sheet1.getRangeByName('B10:D10').cellStyle.hAlign = excel.HAlignType.right;
+    sheet1.getRangeByName('B10:D10').cellStyle.vAlign = excel.VAlignType.center;
+    sheet1.getRangeByName('B10:D10').cellStyle.bold = true;
+
+    // sheet1.getRangeByName('A11:A17').cellStyle.
+
+    sheet1.getRangeByIndex(10, 1).setText('Categoria');
+    sheet1.getRangeByIndex(10, 2).setText('Precosto');
+    sheet1.getRangeByIndex(10, 3).setText('Costo actual');
+    sheet1.getRangeByIndex(10, 4).setText('Diferencia');
+    sheet1.getRangeByIndex(11, 1).setText('Evento');
+    sheet1.getRangeByIndex(12, 1).setText('Asientos y decoracion');
+    sheet1.getRangeByIndex(13, 1).setText('equipo técnico');
+    sheet1.getRangeByIndex(14, 1).setText('Artistas');
+    sheet1.getRangeByIndex(15, 1).setText('Transporte del artista');
+    sheet1.getRangeByIndex(16, 1).setText('Estancia del Artista');
+    sheet1.getRangeByIndex(17, 1).setText('Marketing');
+    sheet1.getRangeByIndex(18, 1).setText('Total');
+
+    sheet1.getRangeByName('B11').setNumber(16250);
+    sheet1.getRangeByName('B12').setNumber(1600);
+    sheet1.getRangeByName('B13').setNumber(1000);
+    sheet1.getRangeByName('B14').setNumber(12400);
+    sheet1.getRangeByName('B15').setNumber(5000);
+    sheet1.getRangeByName('B16').setNumber(3000);
+    sheet1.getRangeByName('B17').setNumber(15000);
+    sheet1.getRangeByName('B18').setFormula('=SUM(B11:B17)');
+
+    sheet1.getRangeByName('C11').setNumber(17500);
+    sheet1.getRangeByName('C12').setNumber(1828);
+    sheet1.getRangeByName('C13').setNumber(800);
+    sheet1.getRangeByName('C14').setNumber(14000);
+    sheet1.getRangeByName('C15').setNumber(2600);
+    sheet1.getRangeByName('C16').setNumber(4464);
+    sheet1.getRangeByName('C17').setNumber(2700);
+    sheet1.getRangeByName('C18').setFormula('=SUM(C11:C17)');
 
     //crear  y abrir file
     List<int> bytes = workbook.saveSync();
