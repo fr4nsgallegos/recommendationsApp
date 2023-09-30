@@ -157,10 +157,17 @@ class _AddPageState extends State<AddPage> {
               },
               child: Text("Generar Excel")),
           ElevatedButton(
-              onPressed: () {
-                getRecommendations();
-              },
-              child: Text("debugeando"))
+            onPressed: () {
+              getRecommendations();
+            },
+            child: Text("debugeando"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _createExcelChart1();
+            },
+            child: Text("CHART 1"),
+          ),
         ],
       ),
     );
@@ -180,6 +187,43 @@ class _AddPageState extends State<AddPage> {
         },
       );
     });
+  }
+
+  Future<void> _createExcelChart1() async {
+    // ignore: unused_local_variable
+    final excel.Workbook workbook = excel.Workbook();
+    final excel.Worksheet sheet = workbook.worksheets[0];
+
+    sheet.getRangeByName('A1').setText("Meses");
+    sheet.getRangeByName('B1').setText("Gastos internos");
+    sheet.getRangeByName('C1').setText('Salidas');
+
+    sheet.getRangeByName('A2').setDateTime(DateTime(2023, 01, 14, 14, 14, 14));
+    sheet.getRangeByName('A3').setDateTime(DateTime(2023, 02, 14, 14, 14, 14));
+    sheet.getRangeByName('A4').setDateTime(DateTime(2023, 03, 14, 14, 14, 14));
+    sheet.getRangeByName('A5').setDateTime(DateTime(2023, 04, 14, 14, 14, 14));
+    sheet.getRangeByName('A6').setDateTime(DateTime(2023, 05, 14, 14, 14, 14));
+
+    sheet.getRangeByName('B2').setNumber(700);
+    sheet.getRangeByName('B3').setNumber(200);
+    sheet.getRangeByName('B4').setNumber(300);
+    sheet.getRangeByName('B5').setNumber(500);
+    sheet.getRangeByName('B6').setNumber(900);
+
+    sheet.getRangeByName('C2').setNumber(30);
+    sheet.getRangeByName('C3').setNumber(40);
+    sheet.getRangeByName('C4').setNumber(50);
+    sheet.getRangeByName('C5').setNumber(5);
+    sheet.getRangeByName('C6').setNumber(100);
+
+    List<int> bytes = workbook.saveSync();
+    workbook.dispose();
+    final String path = (await getApplicationSupportDirectory()).path;
+    final String fileName = '$path/REPORTE.xlsx';
+
+    final File file = File(fileName);
+    await file.writeAsBytes(bytes, flush: true);
+    OpenFile.open(fileName);
   }
 
   Future<void> _createExcel() async {
