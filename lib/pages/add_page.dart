@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,6 +9,7 @@ import 'package:recommendationsapp/constants/constants.dart';
 import 'package:recommendationsapp/pages/map_page.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' as excel;
 import 'package:open_file/open_file.dart';
+import 'package:syncfusion_officechart/officechart.dart';
 
 class AddPage extends StatefulWidget {
   AddPage({super.key});
@@ -216,6 +216,29 @@ class _AddPageState extends State<AddPage> {
     sheet.getRangeByName('C5').setNumber(5);
     sheet.getRangeByName('C6').setNumber(100);
 
+    //creamos instancia a una coleccion de chart
+    final ChartCollection charts = ChartCollection(sheet);
+
+    //agregamos el chart
+    final Chart chart = charts.add();
+
+    //tipo de chart
+    chart.chartType = ExcelChartType.line;
+
+    //setear data
+    chart.dataRange = sheet.getRangeByName('A1:C6');
+    chart.isSeriesInRows = false;
+
+    //estilo a los titulos del chart
+    chart.chartTitle = 'Ingresos mensuales';
+    chart.chartTitleArea.bold = true;
+    chart.chartTitleArea.size = 15;
+
+    chart.legend!.position = ExcelLegendPosition.bottom;
+
+    sheet.charts = charts;
+
+    //crear  y abrir file
     List<int> bytes = workbook.saveSync();
     workbook.dispose();
     final String path = (await getApplicationSupportDirectory()).path;
